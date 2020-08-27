@@ -1,13 +1,17 @@
-<?php include('../admin_inc/header.php');?>
-<?php include('../admin_inc/navbar.php');?>
+<?php include ('../admin_inc/header.php'); ?>
+<?php include ('../admin_inc/navbar.php'); ?>
 
 <?php
 $id = 0;
-if(!isset($_GET['id']) || $_GET['id'] === NULL){
-// echo "<script>window.location = 'category.php';</script>";
-}else{
+if (!isset($_GET['id']) || $_GET['id'] === NULL)
+{
+    // echo "<script>window.location = 'category.php';</script>";
+    
+}
+else
+{
 
-$di = $_GET['id'];
+    $di = $_GET['id'];
 }
 
 ?>
@@ -97,36 +101,40 @@ $di = $_GET['id'];
                     </thead>
                     <tbody>
                         <?php
-        $query = "SELECT * FROM  category ORDER BY category_id"; 
-        $category = $db->select($query);
-    if ($category) {
-        $i = 0;
-        while ($result = $category->fetch_assoc()) {
-                $i++;
-        ?>
+$query = "SELECT * FROM  category ORDER BY category_id";
+$category = $db->select($query);
+if ($category)
+{
+    $i = 0;
+    while ($result = $category->fetch_assoc())
+    {
+        $i++;
+?>
                         <tr>
                             <td>
                                 <?php echo $i; ?>
                             </td>
                             <td>
-                                <?php echo $result['category_id'];?>
+                                <?php echo $result['category_id']; ?>
                             </td>
                             <td>
-                                <?php echo $result['name'];?>
+                                <?php echo $result['name']; ?>
                             </td>
                             <th>
-                                <a href="editcategory.php?id=<?php echo $result['category_id'];?>">
+                                <a href="editcategory.php?id=<?php echo $result['category_id']; ?>">
                                     <i class='bx bxs-message-alt-edit'></i>
                                 </a>
                             </th>
                             <th>
                                 <a onclick="return confirm('Are you sure to delete ?'); "
-                                    href="deletecategory.php?cat_del_id=<?php echo $result['category_id'];?>">
+                                    href="deletecategory.php?cat_del_id=<?php echo $result['category_id']; ?>">
                                     <i class='bx bxs-message-alt-x'></i>
                                 </a>
                             </th>
                         </tr>
-                        <?php } } ?>
+                        <?php
+    }
+} ?>
                     </tbody>
                 </table>
             </div>
@@ -143,43 +151,54 @@ $di = $_GET['id'];
                             <!-- add category -->
                             <div class="panel-body">
                                 <?php
-                    if(isset($_POST['category_update_btn'])){
-                        $category_update_input = $_POST['category_update_input'];
-                        $category_update_input = $fm->input_validation($_POST['category_update_input']);
-                        $category_update_input = mysqli_real_escape_string($db->link, $category_update_input);
-                        if(empty($category_update_input)){
-                            echo '
+if (isset($_POST['category_update_btn']))
+{
+    $category_update_input = $_POST['category_update_input'];
+    $category_update_input = $fm->input_validation($_POST['category_update_input']);
+    $category_update_input = mysqli_real_escape_string($db->link, $category_update_input);
+    if (empty($category_update_input))
+    {
+        echo '
                             <div class="alert alert-primary text-center" role="alert">
                             Filed should not be empty
                             </div>
                             ';
-                    }else{
-                        $query = "UPDATE `category` SET name WHERE `category_id` = '$id' ORDER BY `category_id`";
-                        $cateinsert = $db->update($query);
-                        if($cateinsert){
-                            echo '
+    }
+    else
+    {
+        $query = "UPDATE `category` SET name WHERE `category_id` = '$id' ORDER BY `category_id`";
+        $cateinsert = $db->update($query);
+        if ($cateinsert)
+        {
+            echo '
                             <div class="alert alert-primary text-center" role="alert">
                                 Category Successfully Updated
                             </div>
                             ';
-                        }else{
-                            echo '
+        }
+        else
+        {
+            echo '
                             <div class="alert alert-primary text-center" role="alert">
                             Category Not Updated
                             </div>
-                            ';  
-                        }
-                    }
-                    }
-                    ?>
+                            ';
+        }
+    }
+}
+?>
 
 
                                 <!-- Material input -->
 
-                                <?php $query = "SELECT * FROM `category` WHERE `category_id` = '$id' ORDER BY `category_id`"; 
-                                    $category = $db->select($query);
-                                    while($result = $category->fetch_assoc()){
-                                ?>
+                                <?php $query = "SELECT * FROM `category` WHERE `category_id` = '$id' ORDER BY `category_id`";
+$category = $db->select($query);
+if(!$category){
+	?><div class="md-form form-group mt-5">NO CATEGORY id:<?=$id;?></div><?php 
+}else{ 
+	while ($result = $category->fetch_assoc())
+	{
+?>
                                 <div class="md-form form-group mt-5">
                                     <form action="editcategory.php" method="post">
                                         <!-- Material input -->
@@ -196,7 +215,10 @@ $di = $_GET['id'];
                                 </div>
                                 </form>
                             </div>
-                            <?php }?>
+                            <?php
+	} 
+}
+?>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -211,7 +233,7 @@ $di = $_GET['id'];
                 </div>
             </div>
             <!-- /. ROW  -->
-            <?php include('../admin_inc/footer.php'); ?>
+            <?php include ('../admin_inc/footer.php'); ?>
             <script src="assets/js/jquery-1.10.2.js"></script>
 
             <script src="assets/js/bootstrap.min.js"></script>
