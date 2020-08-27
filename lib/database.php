@@ -39,10 +39,11 @@ Class Database{
 //   }
 	
 	// Insert data
-	public function insert($query){
-	$insert_row = $this->link->query($query) or die($this->link->error.__LINE__);
-	if($insert_row){
-		return $insert_row;
+	public function insert($sql){
+	$query = $this->link->query($sql) or die($this->link->error.__LINE__);
+	if($query){//this is only status
+		return $this->link->insert_id;
+			//$insert_row;
 	} else {
 		return false;
 	}
