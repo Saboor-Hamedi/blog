@@ -76,6 +76,39 @@
             <!-- /. ROW  -->
             <!-- table -->
             <div class="container">
+			<hr/>
+			<?php 
+			if(@$_GET['act']=='failed_insert'){
+				echo '
+                                        <div class="alert alert-primary text-center" role="alert">
+                                        Category Not Inserted
+                                        </div>
+                                        ';
+			}
+			if(@$_GET['act']=='success_insert'){
+				echo '
+                                        <div class="alert alert-primary text-center" role="alert">
+                                         Category Successfully Inserted
+                                        </div>
+                                        ';
+			}
+			
+			if(@$_GET['act']=='success_update'){
+				echo '
+                            <div class="alert alert-primary text-center" role="alert">
+                                Category Successfully Updated
+                            </div>
+                            ';
+			}
+			if(@$_GET['act']=='failed_update'){
+			    echo '
+                            <div class="alert alert-primary text-center" role="alert">
+                            Category Not Updated
+                            </div>
+                            ';
+			}
+
+			?>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -148,17 +181,11 @@
                                     $query = "INSERT INTO category (name) VALUES ('$categoryinput')";
                                     $cateinsert = $db->insert($query);
                                     if($cateinsert){
-                                        echo '
-                                        <div class="alert alert-primary text-center" role="alert">
-                                         Category Successfully Inserted
-                                        </div>
-                                        ';
+                                        
+										echo "<script>window.location = 'category.php?act=success_insert';</script>";exit;
                                     }else{
-                                        echo '
-                                        <div class="alert alert-primary text-center" role="alert">
-                                        Category Not Inserted
-                                        </div>
-                                        ';  
+                                        
+										echo "<script>window.location = 'category.php?act=failed_insert';</script>";exit;
                                     }
                                 }
                              }
@@ -167,7 +194,7 @@
                                
                                     <!-- Material input -->
                                     <div class="md-form form-group mt-5">
-                                    <form action="category.php" method="post">
+                                    <form action="editcategory.php?act=save" method="post">
                                     <!-- Material input -->
                                     <div class="md-form form-group mt-5">
                                         <input type="text" class="form-control" name="categoryinput"

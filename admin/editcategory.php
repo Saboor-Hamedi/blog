@@ -2,6 +2,46 @@
 <?php include ('../admin_inc/navbar.php'); ?>
 
 <?php
+//update
+$stat_update='';
+if(@$_GET['act']=='save'){
+	//print_r($_POST);die;
+}
+if (isset($_POST['category_update_btn']))
+{
+	$id=@$_POST['cat_id'];
+    $category_update_input = $_POST['category_update_input'];
+    $category_update_input = $fm->input_validation($_POST['category_update_input']);
+    $category_update_input = mysqli_real_escape_string($db->link, $category_update_input);
+    if (empty($category_update_input))
+    {
+		echo "<script>window.location = 'category.php?act=failed_update';</script>";exit;
+        $stat_update ='
+                            <div class="alert alert-primary text-center" role="alert">
+                            Filed should not be empty
+                            </div>
+                            ';
+    }
+    elseif($id)
+    {
+        $query = "UPDATE `category` SET name='$category_update_input' WHERE `category_id` = '$id' limit 1";
+        $cateinsert = $db->update($query);
+        if ($cateinsert)
+        {
+            
+			echo "<script>window.location = 'category.php?act=success_update';</script>";exit;
+        }
+        else
+        {
+            
+			echo "<script>window.location = 'category.php?act=failed_update';</script>";exit;
+        }
+    }else{
+		$query ="insert into category(name) values('$category_update_input'";
+		$id_new = $db->insert($query);
+		echo "<script>window.location = 'category.php?act=success_update&id={$id_new}';</script>";exit;
+	}
+}
 $id = 0;
 if (!isset($_GET['id']) || $_GET['id'] === NULL)
 {
@@ -11,7 +51,7 @@ if (!isset($_GET['id']) || $_GET['id'] === NULL)
 else
 {
 
-    $di = $_GET['id'];
+    $id = $_GET['id'];
 }
 
 ?>
@@ -87,8 +127,46 @@ else
                 </div>
             </div>
             <!-- /. ROW  -->
+
             <!-- table -->
             <div class="container">
+<!-- Material input -->
+<?php 
+if($id){
+	$query = "SELECT * FROM `category` WHERE `category_id` = '$id' ORDER BY `category_id`";
+	$category = $db->select($query);
+	if(!$category){
+		?><!--div class="md-form form-group mt-5">NO CATEGORY id:<?=$id;?></div--><?php 
+	}else{ 
+		while ($result = $category->fetch_assoc())
+		{
+	?>
+		<div class="md-form form-group mt-5">
+			<form action="editcategory.php?act=save" method="post">
+				<!-- Material input -->
+				<input type='hidden' value='<?=$id;?>' name='cat_id' />
+				<div class="md-form form-group mt-5">
+					Category
+					<input type="text" value="<?php echo $result['name']; ?>"
+						class="form-control" name="category_update_input"
+						id="formGroupExampleInputMD" placeholder="Type Your Category">
+				</div>
+				<div class="form-group">
+					<button type="submit" name="category_update_btn" class="btn btn-primary" value='save'>
+						Update
+					</button>
+				</div>
+			</form>
+		</div>
+<?php
+		} 
+	}
+
+}
+
+if(false){
+?>
+		
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -137,6 +215,9 @@ if ($category)
 } ?>
                     </tbody>
                 </table>
+<?php
+}
+?>
             </div>
             <!-- end table -->
 
@@ -150,75 +231,10 @@ if ($category)
                         <div class="panel panel-default">
                             <!-- add category -->
                             <div class="panel-body">
-                                <?php
-if (isset($_POST['category_update_btn']))
-{
-    $category_update_input = $_POST['category_update_input'];
-    $category_update_input = $fm->input_validation($_POST['category_update_input']);
-    $category_update_input = mysqli_real_escape_string($db->link, $category_update_input);
-    if (empty($category_update_input))
-    {
-        echo '
-                            <div class="alert alert-primary text-center" role="alert">
-                            Filed should not be empty
-                            </div>
-                            ';
-    }
-    else
-    {
-        $query = "UPDATE `category` SET name WHERE `category_id` = '$id' ORDER BY `category_id`";
-        $cateinsert = $db->update($query);
-        if ($cateinsert)
-        {
-            echo '
-                            <div class="alert alert-primary text-center" role="alert">
-                                Category Successfully Updated
-                            </div>
-                            ';
-        }
-        else
-        {
-            echo '
-                            <div class="alert alert-primary text-center" role="alert">
-                            Category Not Updated
-                            </div>
-                            ';
-        }
-    }
-}
-?>
+                                <?=$stat_update;?>
 
 
-                                <!-- Material input -->
 
-                                <?php $query = "SELECT * FROM `category` WHERE `category_id` = '$id' ORDER BY `category_id`";
-$category = $db->select($query);
-if(!$category){
-	?><div class="md-form form-group mt-5">NO CATEGORY id:<?=$id;?></div><?php 
-}else{ 
-	while ($result = $category->fetch_assoc())
-	{
-?>
-                                <div class="md-form form-group mt-5">
-                                    <form action="editcategory.php" method="post">
-                                        <!-- Material input -->
-                                        <div class="md-form form-group mt-5">
-                                            <input type="text" value="<?php echo $result['name']; ?>"
-                                                class="form-control" name="category_update_input"
-                                                id="formGroupExampleInputMD" placeholder="Type Your Category">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" name="category_update_btn" class="btn btn-primary">
-                                                Update
-                                            </button>
-                                        </div>
-                                </div>
-                                </form>
-                            </div>
-                            <?php
-	} 
-}
-?>
                         </div>
                     </div>
                     <div class="col-md-6">
