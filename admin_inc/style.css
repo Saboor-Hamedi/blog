@@ -23,3 +23,6 @@ th, td{
     
     transform: translateY(200px);
 }
+#mytitles{
+    text-align: center;
+}
