@@ -20,5 +20,6 @@ th, td{
 }
 
 .update{
+    
     transform: translateY(200px);
 }

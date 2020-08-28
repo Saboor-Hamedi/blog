@@ -100,13 +100,13 @@
                                 <?php echo $i; ?>
                             </td>
                             <td>
-                                <?php echo $result['category_id'];?>
+                                <?php  echo $result['category_id'];?>
                             </td>
                             <td>
                                 <?php echo $result['name'];?>
                             </td>
                             <th>
-                                <a href="editcategory.php?id=<?php echo $result['category_id'];?>">
+                                <a href="editcategory.php?cat_id=<?php echo $result['category_id'];?>">
                                     <i class='bx bxs-message-alt-edit'></i>
                                 </a>
                             </th>
@@ -163,22 +163,22 @@
                                 }
                              }
                                 ?>
-   
-                               
-                                    <!-- Material input -->
-                                    <div class="md-form form-group mt-5">
+
+
+                                <!-- Material input -->
+                                <div class="md-form form-group mt-5">
                                     <form action="category.php" method="post">
-                                    <!-- Material input -->
-                                    <div class="md-form form-group mt-5">
-                                        <input type="text" class="form-control" name="categoryinput"
-                                            id="formGroupExampleInputMD" placeholder="Type Your Category">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" name="addcategorybtn" class="btn btn-primary">
-                                            Submit
-                                        </button>
-                                    </div>
-                                    </div>
+                                        <!-- Material input -->
+                                        <div class="md-form form-group mt-5">
+                                            <input type="text" class="form-control" name="categoryinput"
+                                                id="formGroupExampleInputMD" placeholder="Type Your Category">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" name="addcategorybtn" class="btn btn-primary">
+                                                Submit
+                                            </button>
+                                        </div>
+                                </div>
                                 </form>
                             </div>
                         </div>
