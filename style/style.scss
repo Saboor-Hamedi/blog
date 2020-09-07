@@ -1,285 +1,93 @@
-
-$padding: 10px;
-$margin: 5px;
-$primary-color: #fcfcfce5;
-$text-color: black;
-$breakpoint-tablet: 768px;
-$item-font-size: 18px;
-
-@mixin padding($pad) {
-    padding: $pad;
-}
-
 *,
 *::after,
 *::before {
-    padding: 0;
     margin: 0;
-   
+    padding: 0;
     box-sizing: border-box;
 }
-
 body {
+    font-family: "Crete Round", serif;
+}
+ul,
+li,
+h1,
+h2,
+h3,
+p,
+div,
+span,
+nav,
+header {
     padding: 0;
     margin: 0;
-    background-color: $primary-color;
-    font-family: 'Philosopher', sans-serif;
 }
-
 #header {
-    background-color: white;
+    background-color: rgba(4, 4, 5, 0.212);
+    display: flex;
+    .logo {
+        max-width: 300px;
+        margin-top: 7px;
+        margin-left: 10px;
+    }
+    .item-list ul {
+        list-style: none;
+    }
+    .item-list li {
+        display: inline-block;
+        padding: 10px;
+    }
+    .item-list a {
+        color: white;
+        font-size: 18px;
+        text-decoration: none;
+    }
+}
+#header div:nth-child(1) {
+    margin-right: auto;
+}
+.humber-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#header div:nth-child(2) {
-    margin-left: auto;
-}
-
-.logo a {
-
-    margin-left: 10px;
-    font-family: 'Monoton', cursive;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.5s;
-
-}
-
-.menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu li {
-    display: inline-block;
-    font-size: $item-font-size;
-    padding: 10px;
-}
-
-.menu a {
-
-    text-decoration: none;
-    color: black;
-}
-
-#burger {
     display: none;
 }
-
-// end header
-.show-case {
-    background-image: url('../images/show-case.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.555);
-    max-width: 100%;
-    height: 100vh;
-
-    .content {
-        max-width: 100%;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        transform: translateY(10em);
-        padding: 10px;
-
-
-    }
-
-}
-
-// end show-case
-.cards {
-    @include padding(10px);
-
-}
-
-.column {
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-
-    column-gap: 10px;
-
-    .row {
-        width: 100%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        background: chocolate;
-    }
-
-    .card-image img {
-        width: 100%;
-    }
-
-    .card-title {
-        color: $text-color;
-        text-align: center;
-        @include padding(10px);
-
-    }
-}
-
-.card-body p {
-    color: $text-color;
-    @include padding(20px);
-}
-.read-more {
-    text-decoration: none;
-    color: $text-color;
-}
-
-// pagination
-.pagination {
-    margin-top: 10px;
+.humber-btn a {
     padding: 10px;
-    display: block;
-    text-align: center;
-
-}
-
-.pagination ul {
-    padding: 0;
-    margin: 0;
-}
-
-.pagination li {
-    display: inline-block;
-    padding: 10px;
-}
-
-.pagination a {
-    padding: 5px 10px;
-    text-decoration: none;
-    font-size: 16px;
-    color: black;
-}
-
-
-
-// this belongs to post.php, it my post section, where all post can be read
-.main-post{
-    margin: auto;
-    padding: 10px; 
-    display: grid;
-    grid-template-columns: 6fr 1fr;
-    
-}
-.post-title{
-    padding: 10px; 
-    
-}
-.title, .post-body{
-    @include padding(10px);
-}
-
-.title ul{
-   padding: 0;
-   margin: 0;
-   list-style-type: none;
-
-}
-.title li{
-    padding: 10px;
-
-}
-// this is suggestion post, on the post.php file
-.suggestion
-{
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr));
-    grid-gap: 10px;
-
-}
-.suggested-post{
-    text-align: center;
+    color: white;
     font-size: 18px;
 }
-.image-profile{
-    width: 100%;
-    border-radius: 10px;
-}
-// footer
-.footer{
-    width: 100%;
-    padding: 130px;
-    background: black;
-}
-
-
-@media (max-width: $breakpoint-tablet) {
-
-
+@media only screen and (max-width: 900px) {
     #header {
-        display: block;
-        padding: 10px;
+        flex-direction: column;
     }
 
-    .menu {
-        @include padding(0);
-        margin: 0;
+    .item-list {
         display: none;
     }
-
-    .menu ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 0;
-        margin: 0;
-    }
-
-    .menu li {
+    .active {
         display: block;
+        transition: 0.5s;
+        border-top: 1px solid black;
+        background-color: rgb(18, 18, 19);
+    }
+    .item-list ul {
+        display: flex;
+        flex-direction: column;
+    }
+    .item-list li {
+        text-align: center;
+        border-bottom: 1px solid white;
     }
 
-    #burger {
+    .logo {
+        margin-bottom: 10px;
+        color: white;
+        width: 100%;
+    }
+    .humber-btn {
         display: block;
         position: absolute;
         top: 15px;
         right: 10px;
-        cursor: pointer;
     }
-
-    .active {
-        display: block;
-    }
-
-    .cards {
-        @include padding(0);
-        margin: 0;
-    }
-
-    .row {
-        padding: 0;
-
-    }
-
-    .column,.suggestion {
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 10px;
-        @include padding(10px);
-    }
-    .main-post,.more-main-post{
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-@media(max-width: 600px) {
-    .column,.suggestion {
-        grid-template-columns: 1fr;
-    }
-
-    .show-case {
-        padding: 0;
-    }
-
 }

@@ -1,56 +1,46 @@
-<?php include ('../admin_inc/header.php'); ?>
-<?php include ('../admin_inc/navbar.php'); ?>
+<?php include('../admin_inc/header.php'); ?>
+<?php include('../admin_inc/navbar.php'); ?>
+
+
+
 
 <?php
 //update
-$stat_update='';
-if($_GET['act']=='save'){
-	//print_r($_POST);die;
-}
-if (isset($_POST['category_update_btn']))
-{
-	$id=$_POST['cat_id'];
+
+if (isset($_POST['category_update_btn'])) {
+    $id=$_POST['cat_id'];
     $category_update_input = $_POST['category_update_input'];
     $category_update_input = $fm->input_validation($_POST['category_update_input']);
     $category_update_input = mysqli_real_escape_string($db->link, $category_update_input);
-    if (empty($category_update_input))
-    {
-		echo "<script>window.location = 'category.php?act=failed_update';</script>";exit;
-        $stat_update ='
-                            <div class="alert alert-primary text-center" role="alert">
-                            Filed should not be empty
-                            </div>
-                            ';
-    }
-    elseif($id)
-    {
+    if (empty($category_update_input)) {
+        echo "<script>window.location = 'category.php?act=failed_update';</script>";
+        exit;
+        echo '
+    <div class="alert alert-primary text-center" role="alert">
+    Filed should not be empty
+    </div>
+    ';
+    } elseif ($id) {
         $query = "UPDATE `category` SET name='$category_update_input' WHERE `category_id` = '$id' limit 1";
         $cateinsert = $db->update($query);
-        if ($cateinsert)
-        {
-            
-			echo "<script>window.location = 'category.php?act=success_update';</script>";exit;
+        if ($cateinsert) {
+            echo "<script>window.location = 'category.php?act=success_update';</script>";
+            exit;
+        } else {
+            echo "<script>window.location = 'category.php?act=failed_update';</script>";
+            exit;
         }
-        else
-        {
-            
-			echo "<script>window.location = 'category.php?act=failed_update';</script>";exit;
-        }
-    }else{
-		$query ="insert into category(name) values('$category_update_input'";
-		$id_new = $db->insert($query);
-		echo "<script>window.location = 'category.php?act=success_update&id={$id_new}';</script>";exit;
-	}
+    } else {
+        $query ="insert into category(name) values('$category_update_input'";
+        $id_new = $db->insert($query);
+        echo "<script>window.location = 'category.php?act=success_update&id={$id_new}';</script>";
+        exit;
+    }
 }
 $id = 0;
-if (!isset($_GET['id']) || $_GET['id'] === NULL)
-{
+if (!isset($_GET['id']) || $_GET['id'] === null) {
     // echo "<script>window.location = 'category.php';</script>";
-    
-}
-else
-{
-
+} else {
     $id = $_GET['id'];
 }
 
@@ -67,7 +57,7 @@ else
                     <a href="category.php" class="active-menu"><i class="fa fa-desktop"></i> Category</a>
                 </li>
                 <li>
-                    <a href="chart.php"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                    <a href="makepost.php"><i class="fa fa-bar-chart-o"></i> Charts</a>
                 </li>
                 <li>
                     <a href="tab-panel.php"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
@@ -79,8 +69,6 @@ else
                 <li>
                     <a href="form.php"><i class="fa fa-edit"></i> Forms </a>
                 </li>
-
-
                 <li>
                     <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -88,6 +76,7 @@ else
                             <a href="#">Second Level Link</a>
                         </li>
                         <li>
+
                             <a href="#">Second Level Link</a>
                         </li>
                         <li>
@@ -126,31 +115,34 @@ else
                     </h1>
                 </div>
             </div>
-            <!-- /. ROW  -->
 
-            <!-- table -->
             <div class="container">
                 <!-- Material input -->
-                <?php 
-if($id){
-	$query = "SELECT * FROM `category` WHERE `category_id` = '$id' ORDER BY `category_id`";
-	$category = $db->select($query);
-	if(!$category){
-		?>
-        <!--div class="md-form form-group mt-5">NO CATEGORY id:<?=$id;?></div--><?php 
-	}else{ 
-		while ($result = $category->fetch_assoc())
-		{
-	?>
+                <?php
+if ($id) {
+    $query = "SELECT * FROM `category` WHERE `category_id` = '$id' ORDER BY `category_id`";
+    $category = $db->select($query);
+    if (!$category) {
+        ?>
+                <!--div class="md-form form-group mt-5">NO CATEGORY id:<?=$id; ?></div-->
+                <?php
+    } else {
+        while ($result = $category->fetch_assoc()) {
+            ?>
                 <div class="md-form form-group mt-5">
-                    <form action="editcategory.php?act=save" method="post">
+
+                    <div class="alert alert-primary text-center">
+                        <h2>Update ID: <?php echo $id; ?></h2>
+                    </div>
+
+                    <form action="editcategory.php" method="post">
                         <!-- Material input -->
-                        <input type='hidden' value='<?=$id;?>' name='cat_id' />
+                        <input type='hidden' value='<?=$id; ?>' name='cat_id' />
                         <div class="md-form form-group mt-5">
-                            Category
+
                             <input type="text" value="<?php echo $result['name']; ?>" class="form-control"
                                 name="category_update_input" id="formGroupExampleInputMD"
-                                placeholder="Type Your Category">
+                                placeholder="Update Your Category">
                         </div>
                         <div class="form-group">
                             <button type="submit" name="category_update_btn" class="btn btn-primary" value='save'>
@@ -160,13 +152,12 @@ if($id){
                     </form>
                 </div>
                 <?php
-		} 
-	}
-
+        }
+    }
 }
 
-if(false){
-?>
+if (false) {
+    ?>
 
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -181,14 +172,11 @@ if(false){
                     <tbody>
                         <?php
 $query = "SELECT * FROM  category ORDER BY category_id";
-$category = $db->select($query);
-if ($category)
-{
-    $i = 0;
-    while ($result = $category->fetch_assoc())
-    {
-        $i++;
-?>
+    $category = $db->select($query);
+    if ($category) {
+        $i = 0;
+        while ($result = $category->fetch_assoc()) {
+            $i++; ?>
                         <tr>
                             <td>
                                 <?php echo $i; ?>
@@ -212,8 +200,8 @@ if ($category)
                             </th>
                         </tr>
                         <?php
-    }
-} ?>
+        }
+    } ?>
                     </tbody>
                 </table>
                 <?php
@@ -223,7 +211,7 @@ if ($category)
 
 
             <!-- /. ROW  -->
-            <?php include ('../admin_inc/footer.php'); ?>
+            <?php include('../admin_inc/footer.php'); ?>
             <script src="assets/js/jquery-1.10.2.js"></script>
 
             <script src="assets/js/bootstrap.min.js"></script>

@@ -9,7 +9,7 @@
                 <a href="ui-elements.php"><i class="fa fa-desktop"></i> Category</a>
             </li>
             <li>
-                <a href="chart.php"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                <a href="makepost.php"><i class="fa fa-bar-chart-o"></i> Charts</a>
             </li>
             <li>
                 <a href="tab-panel.php"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
@@ -54,7 +54,7 @@
             <li>
                 <a href="empty.php"><i class="fa fa-fw fa-file"></i> Empty Page</a>
             </li>
-            
+
         </ul>
     </div>
 </div>

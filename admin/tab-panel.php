@@ -1,4 +1,4 @@
-﻿<?php include('../admin_inc/header.php');?>
+<?php include('../admin_inc/header.php');?>
 <?php include('../admin_inc/navbar.php');?>
 <!--/. NAV TOP  -->
 <nav class="navbar-default navbar-side" role="navigation">
@@ -12,7 +12,7 @@
                 <a href="category.php"><i class="fa fa-desktop"></i> Category</a>
             </li>
             <li>
-                <a href="chart.php"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                <a href="makepost.php"><i class="fa fa-bar-chart-o"></i> Charts</a>
             </li>
             <li>
                 <a href="tab-panel.php" class="active-menu"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
@@ -390,20 +390,20 @@
         </div>
         <!-- /. ROW  -->
         <?php include('admin_inc/footer.php'); ?>
-            <script src="assets/js/jquery-1.10.2.js"></script>
+        <script src="assets/js/jquery-1.10.2.js"></script>
 
-            <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
 
-            <script src="assets/js/jquery.metisMenu.js"></script>
+        <script src="assets/js/jquery.metisMenu.js"></script>
 
-            <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-            <script src="assets/js/morris/morris.js"></script>
+        <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+        <script src="assets/js/morris/morris.js"></script>
 
 
-            <script src="assets/js/easypiechart.js"></script>
-            <script src="assets/js/easypiechart-data.js"></script>
+        <script src="assets/js/easypiechart.js"></script>
+        <script src="assets/js/easypiechart-data.js"></script>
 
-            <script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
+        <script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
 
-            <script src="assets/js/custom-scripts.js"></script>
-            <!-- /. ROW  -->
+        <script src="assets/js/custom-scripts.js"></script>
+        <!-- /. ROW  -->

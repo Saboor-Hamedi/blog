@@ -1,23 +1,23 @@
-
-<?php include ('../lib/Session.php');?>
-<?php include ('../config/config.php');?>
-<?php include ('../lib/database.php');?>
-<?php include ('../helpers/format.php');?>
+<?php include('../lib/Session.php');?>
+<?php include('../config/config.php');?>
+<?php include('../lib/database.php');?>
+<?php include('../helpers/format.php');?>
 <?php $db = new database();?>
 <?php $fm = new format();?>
 
-<?php 
+<?php
 
 header("Cache-Control: no-cache, must-revalidate"); //HTTP 1.1
 header("Pragma: no-cache"); //HTTP 1.0
-header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 // Date in the past
 //or, if you DO want a file to cache, use:
-header("Cache-Control: max-age=2592000"); 
+header("Cache-Control: max-age=2592000");
 //30days (60sec * 60min * 24hours * 30days)
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,10 +31,12 @@ header("Cache-Control: max-age=2592000");
     <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> 
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- tinymce -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-<!-- MDBootstrap Datatables  -->
-<link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <!-- MDBootstrap Datatables  -->
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="../admin_inc/style.css">
 </head>

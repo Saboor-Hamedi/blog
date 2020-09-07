@@ -6,8 +6,6 @@
 <?php include ('../helpers/format.php');?>
 <?php $db = new database();?>
 <?php $fm = new format();?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
